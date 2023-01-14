@@ -1,8 +1,8 @@
 import React from 'react';
 
 function Gracias( props) {
-
-    if (props.oc) {
+    console.log(props.ocOk)
+ //   if (props.ocOk) {
         return (
         
             <div>
@@ -13,7 +13,7 @@ function Gracias( props) {
             </div>
         )
 
-    } else {
+/*    } else {
         return (
             <div>
                     
@@ -23,7 +23,7 @@ function Gracias( props) {
             </div>
 
         )
-    }
+    }*/
 
 }
 
