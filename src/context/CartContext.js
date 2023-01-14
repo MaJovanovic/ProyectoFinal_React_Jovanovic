@@ -3,7 +3,7 @@ import { createContext } from "react";
 const CartContext = createContext({
   user : {},
   cart: [],
-  cartCounter: 10,
+  cartCounter: 0,
   addToCart: () => {},
 });
 
