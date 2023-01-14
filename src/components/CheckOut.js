@@ -14,12 +14,15 @@ function CheckOut() {
   const [validated, setValidated] = useState(false);
   const navigate = useNavigate();
   const data = useContext(CartContext)
+
+  
   //const [inputValue, setInputValue] = useState('');
   const [formData, setFormData] = useState({nombre:'',
                                         apellido:'',
                                         ciudad:'',
                                       estado: '',
                                       postal: '',
+                                      email: ''
                                     }
                                       
                                       );
@@ -67,11 +70,11 @@ function CheckOut() {
     let ocOk = ''
      oc.then((tempId)=> { ocOk = tempId})
     
-     console.log("OcOk:    ", ocOk) 
+     //console.log("OcOk:    ", ocOk) 
 
-   
-
-    navigate('/gracias', { ocOk })
+   ocOk = true
+    // true por el momento
+    navigate('/gracias', {replace: true})
   };
 
   const handleOnchange = (event)=> {
@@ -83,6 +86,7 @@ function CheckOut() {
     }));
   }
 
+  let q = 0;
   return (
     <Container>
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -133,6 +137,37 @@ function CheckOut() {
             Por favor ingrese codigo postal.
           </Form.Control.Feedback>
         </Form.Group>
+        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+          <Form.Label>Email</Form.Label>
+          <InputGroup hasValidation>
+            <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+            <Form.Control
+              type="text"
+              placeholder="Email"
+              aria-describedby="inputGroupPrepend"
+              required
+              value={formData.email} name= "email" onChange={handleOnchange}
+            />
+            <Form.Control.Feedback type="invalid">
+              Por favor ingrese email
+            </Form.Control.Feedback>
+          </InputGroup>
+        </Form.Group>
+        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+          <Form.Label>Repita Email</Form.Label>
+          <InputGroup hasValidation>
+            <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+            <Form.Control
+              type="text"
+              placeholder="Email"
+              aria-describedby="inputGroupPrepend"
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Por favor ingrese Email
+            </Form.Control.Feedback>
+          </InputGroup>
+        </Form.Group>
       </Row>
       <Form.Group className="mb-3">
         <Form.Check
@@ -145,19 +180,23 @@ function CheckOut() {
       <Button type="submit">Submit form</Button>
     </Form>
     
-    {data.cart.map((product) => (
+    {
+    data.cart.map((product) => (
+      
                 <Card>
                 <Row>
                 <div key={product.id}>
                     <Col xs={6} md={4}>{product.codigo}</Col>
-                    <Col xs={6} md={4}>cantidad: {product.cantidad}</Col>                   
+                    <Col xs={6} md={4}>cantidad: {'1'}</Col>                   
                     <Col xs={6} md={4}>descripcion: {product.descripcion}</Col>
                     <Col xs={6} md={4}>precio: {product.precio}</Col>
                 </div>
                 </Row>
                 </Card> 
             
-            ))}
+            ))
+            
+    }
      
 
     </Container>
